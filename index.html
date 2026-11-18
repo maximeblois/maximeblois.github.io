@@ -1,0 +1,984 @@
+<!doctype html><html lang="fr"><head>
+<title>Maxime Blois, Portfolio BTS SIO SISR</title>
+<meta name="description" content="Portfolio de Maxime Blois, étudiant en BTS SIO option SISR : projets, compétences, acquis et veille technologique.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%23ff6a3d%27/%3E%3C/svg%3E">
+<meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!</style>
+</head><body>
+ad><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout concept: one long scroll with terminal-style section paths (~/projets),
+   a drifting network graph behind the hero, project details sliding in from the side. */
+:root{
+  --display:'Unbounded','Arial Black',system-ui,sans-serif;
+  --body:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --bg:#0a0f17; --bar:#0a0f17; --surface:#111826; --surface-2:#182236; --line:#243149;
+  --fg:#e8eef7; --muted:#93a1b7;
+  --accent:#ff6a3d; --accent-ink:#1a0a04; --accent-soft:rgba(255,106,61,.13);
+  --net-rgb:147,161,183; --scrim:rgba(4,7,12,.62);
+  --term-bg:#0c1220; --term-fg:#dbe6f5; --term-dim:#7c8ba3; --term-cool:#78b8ff; --term-line:rgba(255,255,255,.08); --term-shadow:rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f2f4f8; --bar:#f2f4f8; --surface:#ffffff; --surface-2:#e9edf4; --line:#d2d9e5;
+    --fg:#0c1320; --muted:#536076;
+    --accent:#d83f0c; --accent-ink:#ffffff; --accent-soft:rgba(216,63,12,.09);
+    --net-rgb:83,96,118; --scrim:rgba(12,19,32,.4);
+    --term-bg:#f5f7fb; --term-fg:#1b2638; --term-dim:#66748b; --term-cool:#1b64c4; --term-line:#d2d9e5; --term-shadow:rgba(12,19,32,.18);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f2f4f8; --bar:#f2f4f8; --surface:#ffffff; --surface-2:#e9edf4; --line:#d2d9e5;
+  --fg:#0c1320; --muted:#536076;
+  --accent:#d83f0c; --accent-ink:#ffffff; --accent-soft:rgba(216,63,12,.09);
+  --net-rgb:83,96,118; --scrim:rgba(12,19,32,.4);
+  --term-bg:#f5f7fb; --term-fg:#1b2638; --term-dim:#66748b; --term-cool:#1b64c4; --term-line:#d2d9e5; --term-shadow:rgba(12,19,32,.18);
+  color-scheme:light;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bar)}
+h1,h2,h3,h4,p,ul,ol,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.wrap{max-width:1160px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--mono)}
+.dim{color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* demo notice */
+.demo{background:var(--accent-soft);border-bottom:1px solid var(--line);font-size:13px}
+.demo .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding-block:8px}
+.demo p{min-width:0}
+.demo button{background:none;border:1px solid var(--line);border-radius:6px;padding:3px 10px;cursor:pointer;font-size:12px;flex:none}
+.demo button:hover{border-color:var(--accent)}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bar);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--mono);font-size:14px;font-weight:500;flex:none}
+.logo-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:8px;background:var(--accent);color:var(--accent-ink);font-family:var(--display);font-size:12px;font-weight:700}
+.links{display:flex;gap:2px;min-width:0;overflow-x:auto;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+.links a{padding:8px 10px;font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;border-radius:6px}
+.links a:hover{color:var(--fg)}
+.links a[aria-current="true"]{color:var(--fg);box-shadow:inset 0 -2px 0 var(--accent);border-radius:0}
+.theme{flex:none;width:36px;height:36px;display:grid;place-items:center;background:none;border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.theme:hover{border-color:var(--accent)}
+.theme svg{width:18px;height:18px}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#net{position:fixed;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
+main,footer{position:relative;z-index:1}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr);gap:48px;align-items:center;padding-block:clamp(56px,9vw,112px)}
+.hero-copy{min-width:0;display:flex;flex-direction:column;gap:22px;align-items:flex-start}
+.path{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.04em}
+h1{font-family:var(--display);font-weight:800;line-height:.98;letter-spacing:-.025em;font-size:clamp(3rem,11vw,5.8rem)}
+h1 span{display:block}
+h1 .last{color:var(--fg)}
+.focus{font-family:var(--mono);font-size:15px;color:var(--muted);min-height:1.7em;max-width:100%}
+.focus .prompt{color:var(--accent)}
+.focus #typed{color:var(--fg)}
+.caret{display:inline-block;width:.55em;height:1.05em;margin-left:3px;vertical-align:-.15em;background:var(--accent);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.lead{max-width:52ch;color:var(--muted);font-size:17px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s}
+.btn:hover{border-color:var(--accent);transform:translateY(-2px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{box-shadow:0 10px 28px -10px var(--accent)}
+.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
+.hero-copy>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+
+.term{min-width:0;border:1px solid var(--line);border-radius:14px;background:var(--term-bg);overflow:hidden;box-shadow:0 30px 60px -34px var(--term-shadow);animation:rise .8s .25s cubic-bezier(.2,.7,.2,1) both}
+.term-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--term-line);font-family:var(--mono);font-size:12px;color:var(--term-dim)}
+.lights{display:flex;gap:8px}
+.light{position:relative;width:13px;height:13px;padding:0;border:0;border-radius:50%;cursor:pointer;display:grid;place-items:center;color:rgba(0,0,0,.7);font:700 11px/1 var(--mono)}
+.light::after{content:"";position:absolute;inset:-5px}
+.light{background:var(--term-dim);opacity:.55;transition:background .15s,opacity .15s}
+.light:hover,.light:focus-visible{opacity:1}
+.l-close:hover,.l-close:focus-visible{background:#ff5f57}
+.l-min:hover,.l-min:focus-visible{background:#febc2e}
+.l-max:hover,.l-max:focus-visible{background:#28c840}
+.light b{font-weight:700;opacity:0;transition:opacity .12s}
+.light:hover b,.light:focus-visible b{opacity:1}
+.term-title{margin-left:8px}
+.term.big pre{font-size:15.5px;line-height:1.95}
+.term-reopen{justify-self:start}
+.term pre{margin:0;padding:18px 20px 22px;font:400 13.5px/1.85 var(--mono);color:var(--term-fg);white-space:pre-wrap;overflow-wrap:anywhere}
+.term .p{color:var(--accent)}
+.term .c{color:var(--term-cool)}
+.term .d{color:var(--term-dim)}
+
+/* sections */
+.section{padding-block:clamp(64px,10vw,116px);border-top:1px solid var(--line)}
+.about{padding-block:clamp(64px,10vw,116px)}
+.eyebrow{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.04em;margin-bottom:14px}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,4.4vw,2.7rem);line-height:1.12;letter-spacing:-.015em;text-wrap:balance;max-width:20ch}
+h3{font-family:var(--display);font-weight:600;font-size:clamp(1.15rem,2.6vw,1.5rem);line-height:1.2;text-wrap:balance}
+.sec-lead{margin-top:16px;max-width:60ch;color:var(--muted)}
+.about-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,6vw,72px);align-items:start}
+.about-text{display:flex;flex-direction:column;gap:18px;min-width:0}
+.about-text p{max-width:60ch;color:var(--muted)}
+.about-text p:first-of-type{color:var(--fg)}
+.facts{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:6px 22px;min-width:0}
+.facts div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;padding:15px 0;border-bottom:1px solid var(--line)}
+.facts div:last-child{border-bottom:0}
+.facts dt{font-family:var(--mono);font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;padding-top:3px}
+.facts dd{font-weight:500}
+.sub{margin-top:clamp(48px,7vw,80px)}
+.sub h3{margin-bottom:8px}
+.sub .sec-lead{margin-top:0;margin-bottom:28px}
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start;margin-top:clamp(48px,7vw,80px)}
+.duo .sub{margin-top:0}
+@media (min-width:1001px){.duo .sgrid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:1000px){.duo{grid-template-columns:minmax(0,1fr);gap:clamp(48px,7vw,80px)}}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:28px 22px}
+.flow li{position:relative;padding-top:16px;border-top:2px solid var(--line);min-width:0}
+.flow li::before{content:"";position:absolute;top:-2px;left:0;width:38px;border-top:2px solid var(--accent)}
+.flow .no{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.flow strong{display:block;font-weight:700;margin:2px 0 4px}
+.flow p{font-size:14px;color:var(--muted);line-height:1.55}
+.mtrack{position:relative;max-width:620px;margin-inline:auto;display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;border-radius:14px}
+.mtrack::-webkit-scrollbar{display:none}
+.mslide{flex:0 0 100%;align-items:center;text-align:center;min-width:0;scroll-snap-align:start;display:flex;flex-direction:column;gap:10px;min-height:200px;padding:clamp(22px,4vw,34px) clamp(22px,4vw,34px) 60px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.mslide .no{font-family:var(--mono);font-size:13px;color:var(--accent)}
+.mslide h4{font-family:var(--display);font-weight:600;font-size:clamp(1.2rem,3vw,1.6rem);line-height:1.2;text-wrap:balance}
+.mslide p{max-width:46ch;color:var(--muted);font-size:16px}
+.mctl{max-width:620px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+.mwrap{position:relative;max-width:620px;margin-inline:auto}
+.mcount{position:absolute;left:0;right:0;bottom:16px;text-align:center;pointer-events:none;font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.dots{display:flex;justify-content:center;gap:6px;margin-top:10px}
+@media (max-width:760px){.marrows{align-items:flex-end;padding:0 10px 10px}.marrows .mbtn:first-child,.marrows .mbtn:last-child{transform:none}.mcount{bottom:18px}}
+.dot{position:relative;width:28px;height:20px;padding:0;background:none;border:0;cursor:pointer}
+.dot::before{content:"";position:absolute;left:0;right:0;top:7px;height:6px;border-radius:3px;background:var(--line);transition:background .2s}
+.dot[aria-current="true"]::before{background:var(--accent)}
+.marrows{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.marrows .mbtn:first-child{transform:translateX(-50px)}
+.marrows .mbtn:last-child{transform:translateX(50px)}
+.mbtn{pointer-events:auto;width:36px;height:36px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.mbtn:hover:not(:disabled){border-color:var(--accent)}
+.mbtn:disabled{opacity:.35;cursor:default}
+
+/* projects */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:32px 0 24px}
+.chip{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:transparent;font-size:14px;font-weight:600;cursor:pointer;transition:border-color .15s,background .15s}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip .n{font-family:var(--mono);font-size:12px;opacity:.75;font-variant-numeric:tabular-nums}
+.filters .count:first-child{margin-left:0}
+.count{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,310px),1fr));gap:16px}
+.pgrid li{min-width:0}
+.pcard{display:flex;flex-direction:column;gap:12px;width:100%;height:100%;text-align:left;padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:14px;cursor:pointer;transition:transform .2s,border-color .2s}
+.pcard:hover{transform:translateY(-3px);border-color:var(--accent)}
+.pcard>span{display:block;min-width:0}
+.pc-top{display:flex!important;justify-content:space-between;align-items:center;gap:10px}
+.pc-title{font-family:var(--display);font-weight:600;font-size:1.02rem;line-height:1.3}
+.pc-sum{color:var(--muted);font-size:15px}
+.pc-go{margin-top:auto;font-family:var(--mono);font-size:13px;padding-top:6px;transition:color .2s}
+.pcard:hover .pc-go{color:var(--accent)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.ico{width:15px;height:15px;flex:none}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:12px;padding:3px 8px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
+
+/* skills */
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.jump a{font-family:var(--mono);font-size:13px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;text-decoration:none}
+.jump a:hover{border-color:var(--accent);color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:22px}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
+.sgroup{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;min-width:0}
+.sgroup h4{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:.95rem;margin-bottom:8px}
+.sgroup h4 .ico{width:20px;height:20px;color:var(--accent)}
+.sgroup li{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px dashed var(--line);font-size:15px}
+.sgroup li span:first-child{min-width:0}
+.meter{display:inline-flex;gap:4px;flex:none}
+.meter i{width:16px;height:6px;border-radius:2px;background:var(--line)}
+.meter i.on{background:var(--accent)}
+.acq li{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;align-items:start;padding:18px 0;border-top:1px solid var(--line)}
+.acq li:last-child{border-bottom:1px solid var(--line)}
+.acq .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start}
+.lchip{font-family:var(--mono);font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:transparent;cursor:pointer;transition:border-color .15s,color .15s}
+.lchip:hover{border-color:var(--accent);color:var(--accent)}
+.bloc+.bloc{margin-top:36px}
+.bloc-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;font-family:var(--display);font-weight:600;font-size:1rem;line-height:1.3;margin-bottom:10px}
+.bloc-t .mono{font-size:12px;font-weight:500;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.aq-main{display:flex;flex-direction:column;gap:8px;min-width:0}
+.aq-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.ctx{font-family:var(--mono);font-size:12px;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.atool{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;padding:3px 9px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
+.atool .meter{gap:3px}
+.atool .meter i{width:10px;height:4px}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-top:12px}
+.vtop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.vtop time{font-size:12px}
+.vsrc{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:13px;text-decoration:none;color:var(--accent)}
+.vsrc:hover{text-decoration:underline}
+.vcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.vcard h4{font-family:var(--display);font-weight:600;font-size:1rem;line-height:1.3}
+.vcard p{font-size:15px;color:var(--muted)}
+.vcard .keep{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line)}
+.vcard .keep b{display:block;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--accent);margin-bottom:4px;letter-spacing:.04em}
+.vcard .keep p{color:var(--fg)}
+.sources{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:26px}
+.sources .mono{font-size:12px;color:var(--muted);margin-right:4px}
+.sources a{font-family:var(--mono);font-size:12px;padding:5px 11px;border:1px solid var(--line);border-radius:999px;text-decoration:none}
+.sources a:hover{border-color:var(--accent);color:var(--accent)}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding-block:48px 56px}
+footer .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px}
+footer h2{font-size:clamp(1.3rem,3vw,1.8rem);max-width:24ch}
+footer p{margin-top:12px;color:var(--muted);font-size:14px}
+.contact li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.contact li:first-child{border-top:1px solid var(--line)}
+.contact a{min-width:0;text-align:right;overflow-wrap:anywhere;color:var(--accent);text-decoration:none}
+.contact a:hover{text-decoration:underline}
+
+/* project panel */
+.scrim{position:fixed;inset:0;z-index:40;background:var(--scrim);opacity:0;transition:opacity .2s}
+.scrim.open{opacity:1}
+.panel{position:fixed;top:0;right:0;bottom:0;z-index:50;width:min(540px,100%);overflow-y:auto;background:var(--surface);border-left:1px solid var(--line);
+  padding:calc(22px + env(safe-area-inset-top,0px)) max(22px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) 24px;
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1)}
+.panel.open{transform:none}
+.pn-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.pn-meta{display:flex;align-items:center;gap:10px;font-size:12px;min-width:0}
+.close{flex:none;width:36px;height:36px;display:grid;place-items:center;background:none;border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.close:hover{border-color:var(--accent)}
+.panel h3{font-size:1.4rem;margin-bottom:10px}
+.pn-sum{color:var(--muted);margin-bottom:6px}
+.panel h4{font-family:var(--mono);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin:26px 0 8px}
+.steps li{position:relative;padding:6px 0 6px 22px}
+.steps li::before{content:"›";position:absolute;left:4px;color:var(--accent);font-weight:700}
+.pn-doc{margin-top:30px}
+
+@media (max-width:900px){
+  .hero-grid,.about-grid,footer .wrap{grid-template-columns:minmax(0,1fr)}
+  .hero-grid{gap:36px}
+}
+@media (max-width:560px){
+  .logo-text{display:none}
+  .links a{padding:8px 7px;font-size:13px}
+  .count{margin-left:0;width:100%}
+  .acq li{grid-template-columns:minmax(0,1fr)}
+  .acq .chips{justify-content:flex-start}
+  .facts div{grid-template-columns:minmax(0,1fr);gap:2px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+
+<canvas id="net" aria-hidden="true"></canvas>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#presentation" aria-label="Accueil"><span class="logo-mark">MB</span><span class="logo-text">maxime.blois</span></a>
+    <nav class="links" aria-label="Sections">
+      <a href="#presentation">Présentation</a>
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences &amp; Acquis</a>
+      <a href="#veille">Veille techno</a>
+    </nav>
+    <button type="button" class="theme" id="theme" aria-label="Changer de thème">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v16" /><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+<section id="presentation">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="path" style="--i:0">~/portfolio</p>
+        <h1 style="--i:1"><span class="first">Maxime</span><span class="last">Blois</span></h1>
+        <p class="focus" style="--i:2"><span class="prompt">$</span> focus <span id="typed">réseaux et infrastructure</span><span class="caret" aria-hidden="true"></span></p>
+        <p class="lead" style="--i:3">Étudiant en 2e année de BTS SIO option SISR, en alternance chez Novacel depuis 1 an. Je monte des infrastructures en TP, je les teste, puis je documente tout dans un rapport. Ce portfolio réunit mes projets, mes compétences et ma veille technologique.</p>
+        <div class="cta" style="--i:4">
+          <a class="btn" href="#apropos">Présentation</a>
+          <a class="btn" href="#projets">Projets</a>
+          <a class="btn" href="#competences">Compétences &amp; Acquis</a>
+          <a class="btn" href="#veille">Veille techno</a>
+        </div>
+      </div>
+      <div class="term">
+        <div class="term-bar"><span class="lights"><button type="button" class="light l-close" aria-label="Fermer la fenêtre"><b>×</b></button><button type="button" class="light l-min" aria-label="Réduire la fenêtre"><b>−</b></button><button type="button" class="light l-max" aria-label="Agrandir la fenêtre"><b>+</b></button></span><span class="term-title">maxime@lab: ~</span></div>
+<pre><span class="p">$</span> whoami
+<span class="c">maxime-blois</span>
+<span class="p">$</span> ls ~/domaines
+reseau/  systemes/  securite/  scripts/
+<span class="p">$</span> cat statut.txt
+<span class="d">en formation · rapports de TP à jour</span>
+<span class="p">$</span> git log --oneline -3
+<span class="d">a41f9c2</span> schéma réseau validé
+<span class="d">7be03d1</span> tests ACL documentés
+<span class="d">c92aa10</span> sauvegarde restaurée avec succès</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap about" id="apropos">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="eyebrow" style="margin:0">~/presentation</p>
+        <h2>Infrastructures, systèmes et réseaux.</h2>
+        <p>Ce qui me plaît, c'est de comprendre un système de bout en bout : le câble, l'adresse, le service, puis la personne qui s'en sert.</p>
+        <p>Mon alternance chez Novacel me confronte à de vrais besoins, et mes TP me laissent le temps de tester, de casser et de refaire proprement. Chaque rapport est rattaché à un projet de ce portfolio.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Parcours</dt><dd>BTS SIO option SISR, 2e année, en alternance chez Novacel</dd></div>
+        <div><dt>Domaines</dt><dd>Réseaux, systèmes, sécurité</dd></div>
+        <div><dt>Livrables</dt><dd>Rapports de TP, schémas, procédures</dd></div>
+        <div><dt>Outils</dt><dd>Packet Tracer, GNS3, VirtualBox, VMware Workstation, Hyper-V</dd></div>
+        <div><dt>Objectif</dt><dd>Renforcer mes compétences réseaux et continuer mes études dans ce domaine</dd></div>
+      </dl>
+    </div>
+
+    <div class="sub">
+      <h3>Ma méthode sur un TP</h3>
+      <p class="sec-lead" style="margin-top:8px">Les cinq étapes que je suis du sujet au rapport. Glisse pour passer à la suivante.</p>
+      <div class="mwrap">
+      <div class="mtrack" id="mtrack" tabindex="0" role="region" aria-label="Méthode sur un TP, étapes à faire défiler">
+        <article class="mslide"><span class="no">01</span><h4>Cahier des charges</h4><p>Lire le besoin et lister les contraintes.</p></article>
+        <article class="mslide"><span class="no">02</span><h4>Schéma</h4><p>Topologie et plan d'adressage avant toute configuration.</p></article>
+        <article class="mslide"><span class="no">03</span><h4>Mise en œuvre</h4><p>Installer, configurer, noter chaque commande.</p></article>
+        <article class="mslide"><span class="no">04</span><h4>Tests</h4><p>Grille de tests, cas normaux et cas de panne.</p></article>
+        <article class="mslide"><span class="no">05</span><h4>Rapport</h4><p>Rédiger, illustrer, relire.</p></article>
+      </div>
+        <span class="mcount" id="mcount" aria-live="polite">01 / 05</span>
+        <div class="marrows">
+          <button type="button" class="mbtn" id="mprev" aria-label="Étape précédente"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+          <button type="button" class="mbtn" id="mnext" aria-label="Étape suivante"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <div class="dots" id="mdots"></div>
+    </div>
+  </div>
+</section>
+
+<section id="projets" class="section">
+  <div class="wrap">
+    <p class="eyebrow">~/projets</p>
+    <h2>Ce que j'ai construit</h2>
+    <p class="sec-lead">Chaque projet vient d'un TP. Ouvre une carte pour voir l'architecture, les réalisations, les tests et le résultat.</p>
+    <div class="filters" id="filters" role="group" aria-label="Filtrer par domaine"></div>
+    <ul class="pgrid" id="pgrid"></ul>
+  </div>
+</section>
+
+<section id="competences" class="section">
+  <div class="wrap">
+    <p class="eyebrow">~/competences</p>
+    <h2>Compétences et acquis</h2>
+    <p class="sec-lead">Deux angles sur ce que je sais faire : le niveau par outil et les acquis prouvés par un projet.</p>
+    <nav class="jump" aria-label="Dans cette section">
+      <a href="#mes-competences">Compétences</a>
+      <a href="#acquis">Acquis</a>
+    </nav>
+
+    <div class="duo">
+    <div class="sub" id="mes-competences">
+      <h3>Compétences</h3>
+      <p class="sec-lead">Mon niveau actuel, outil par outil.</p>
+      <div class="legend" aria-label="Légende des niveaux">
+        <span><span class="meter"><i class="on"></i><i></i><i></i></span>Notions</span>
+        <span><span class="meter"><i class="on"></i><i class="on"></i><i></i></span>Appliqué</span>
+        <span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i></span>Autonome</span>
+      </div>
+      <div class="sgrid" id="sgrid"></div>
+    </div>
+
+    <div class="sub" id="acquis">
+      <h3>Acquis</h3>
+      <p class="sec-lead">Classés par bloc de compétences du BTS SIO. Chaque acquis renvoie vers le projet qui le prouve.</p>
+      <p class="mono dim" id="acqmeta" style="margin:0 0 14px;font-size:12px"></p>
+      <div id="acq"></div>
+    </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="veille" class="section">
+  <div class="wrap">
+    <p class="eyebrow">~/veille</p>
+    <h2>Veille technologique</h2>
+    <p class="sec-lead" style="margin-bottom:28px">Ma routine pour suivre l'actualité, puis le fil des dernières actus, mis à jour automatiquement chaque jour.</p>
+      <ol class="flow">
+        <li><span class="no">01</span><strong>Collecter</strong><p>Recherche automatique des actus réseaux, systèmes et cybersécurité.</p></li>
+        <li><span class="no">02</span><strong>Trier</strong><p>Sources fiables et utiles pour mes cours.</p></li>
+        <li><span class="no">03</span><strong>Résumer</strong><p>Une fiche courte avec le lien vers la source.</p></li>
+        <li><span class="no">04</span><strong>Publier</strong><p>Le fil se met à jour tout seul, avec la date de chaque actu.</p></li>
+      </ol>
+      <p class="mono dim" id="feedmeta" style="margin-top:30px;font-size:12px"></p>
+      <div class="vgrid" id="vgrid"></div>
+      <div class="sources">
+        <span class="mono">Sources suivies</span>
+        <a href="https://cyber.gouv.fr" target="_blank" rel="noopener noreferrer">ANSSI ↗</a>
+        <a href="https://www.cert.ssi.gouv.fr" target="_blank" rel="noopener noreferrer">CERT-FR ↗</a>
+        <a href="https://www.lemagit.fr" target="_blank" rel="noopener noreferrer">LeMagIT ↗</a>
+        <a href="https://www.lemondeinformatique.fr" target="_blank" rel="noopener noreferrer">Le Monde Informatique ↗</a>
+        <a href="https://www.it-connect.fr" target="_blank" rel="noopener noreferrer">IT-Connect ↗</a>
+      </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h2>Pour toute question, merci de me contacter via l'un des liens ci-contre :</h2>
+    </div>
+    <ul class="contact">
+      <li><span class="mono">linkedin</span><a href="https://www.linkedin.com/in/maximebls1999/" target="_blank" rel="noopener noreferrer">linkedin.com/in/maximebls1999 ↗</a></li>
+      <li><span class="mono">courriel</span><a href="mailto:maximeblois1999@hotmail.com">maximeblois1999@hotmail.com</a></li>
+    </ul>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title" hidden></aside>
+
+<script>
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+const root = document.documentElement;
+
+/* ---------- data ---------- */
+const P = {
+  net:'<circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M12 7.2v4.3M12 11.5L6.3 17.2M12 11.5l5.7 5.7"/>',
+  server:'<rect x="3.5" y="4" width="17" height="6.5" rx="1.5"/><rect x="3.5" y="13.5" width="17" height="6.5" rx="1.5"/><path d="M7 7.2h.01M7 16.7h.01"/>',
+  shield:'<path d="M12 3l7 2.8v5.6c0 4.2-2.9 7.6-7 9.6-4.1-2-7-5.4-7-9.6V5.8z"/><path d="M9 12l2.2 2.2L15.5 10"/>',
+  code:'<path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5M13.5 5l-3 14"/>'
+};
+const icon = n => `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]}</svg>`;
+
+const CATS = {
+  reseau:{label:'Réseau', icon:'net'},
+  systeme:{label:'Système', icon:'server'},
+  securite:{label:'Sécurité', icon:'shield'},
+  code:{label:'Scripts et dev', icon:'code'}
+};
+
+const PROJECTS = [
+  {id:'infra', short:'Mini-infrastructure', cat:'systeme', ctx:'TP', date:'18 novembre 2026',
+   title:'Mini-infrastructure d\'entreprise virtualisée',
+   summary:'Un pare-feu pfSense, un contrôleur de domaine Windows Server 2025 et un poste client Windows 11, le tout sous Hyper-V.',
+   stack:['Hyper-V','pfSense','Windows Server 2025','Windows 11 Pro','AD DS','DNS','DHCP','GPO'],
+   objective:'Monter le réseau d\'une petite entreprise : isoler un réseau local derrière un pare-feu avec accès Internet par NAT, centraliser les comptes avec Active Directory, distribuer les adresses en DHCP, appliquer une GPO et valider l\'ensemble par des tests.',
+   arch:'Trois machines virtuelles dans le domaine lab.local. FW01 (pfSense) relie Internet au réseau privé 192.168.10.0/24, où se trouvent SRV-DC01 (192.168.10.10, AD DS, DNS, DHCP) et PC-CLIENT01 (DHCP, de .100 à .200).',
+   done:[
+     'Commutateurs virtuels Hyper-V : Default Switch pour le WAN, commutateur privé LAN-TP pour le réseau local',
+     'Installation de pfSense (Secure Boot désactivé), interfaces WAN et LAN, adresse LAN passée en 192.168.10.1/24',
+     'Windows Server 2025 : IP fixe, promotion en contrôleur de domaine lab.local, rôles DNS et DHCP',
+     'Étendue DHCP 192.168.10.100 à .200 avec passerelle, DNS et domaine (options 003, 006, 015)',
+     'Unité d\'organisation Entreprise, groupe GG_Employes et utilisateur de test',
+     'GPO de fond d\'écran liée à l\'unité d\'organisation',
+     'Poste Windows 11 Pro joint au domaine, ouverture de session avec le compte du domaine'],
+   tests:[
+     'ping 192.168.10.1 et 8.8.8.8 depuis le serveur : LAN et sortie Internet par pfSense',
+     'ipconfig /all sur le client : adresse reçue par DHCP, passerelle, DNS et suffixe lab.local',
+     'nslookup lab.local résolu en 192.168.10.10',
+     'Ouverture de session du domaine et GPO appliquée (gpresult /r)',
+     'whoami /groups : membre de GG_Employes, sans droits d\'administrateur'],
+   issues:[
+     'ISO de pfSense fourni compressé (.iso.gz) : à décompresser avant de l\'utiliser dans Hyper-V',
+     'pfSense ne démarre pas avec le Secure Boot actif : désactivé dans les paramètres de la VM',
+     'Windows 11 lent avec 4 Go et la mémoire dynamique : mémoire augmentée et fixée',
+     'Groupe absent de gpresult : l\'appartenance aux groupes n\'est lue qu\'à l\'ouverture de session, une reconnexion suffit'],
+   result:'L\'infrastructure fonctionne de bout en bout : pfSense route et fait le NAT, SRV-DC01 fournit l\'annuaire, le DNS et le DHCP, et le poste joint au domaine applique la GPO de l\'utilisateur. Tous les tests de validation sont réussis.',
+   skills:['Virtualisation','Active Directory','GPO','DHCP et DNS','pfSense','Documentation technique'],
+   pdf:'rapport-tp-mini-infrastructure.pdf'}
+];
+
+const LV = ['Notions','Appliqué','Autonome'];
+const SKILLS = [
+  {g:'Réseau', i:'net', items:[['Adressage IP et VLSM',3],['VLAN et routage inter-VLAN',3],['DHCP et DNS',2]]},
+  {g:'Système', i:'server', items:[['Active Directory',3],['GPO',3],['Virtualisation',3],['Linux Debian',2],['Supervision Zabbix',3],['Grafana',3],['Uptime Kuma',3],['GLPI',3]]},
+  {g:'Sécurité', i:'shield', items:[['pfSense',2],['FortiGate',2],['Règles de filtrage (NAT, DMZ)',2],['MFA',2],['BitLocker',2]]},
+  {g:'Scripts et dev', i:'code', items:[['Bash',2],['PowerShell',2],['Python',1],['HTML, CSS, JavaScript',1],['SQL',1],['Git',1]]}
+];
+
+const BLOCS = [
+  {k:'B1', t:"Support et mise à disposition de services informatiques"},
+  {k:'B2', t:"Administration des systèmes et des réseaux"},
+  {k:'B3', t:"Cybersécurité des services informatiques"}
+];
+const ACQUIS = [
+  {b:'B2', w:'TP', t:"Concevoir un plan d'adressage et isoler un réseau local derrière un pare-feu", p:['infra'], tools:['DHCP et DNS','pfSense']},
+  {b:'B2', w:'TP', t:"Déployer et administrer un annuaire d'entreprise", p:['infra'], tools:['Active Directory','GPO']},
+  {b:'B2', w:'TP', t:"Monter une infrastructure complète sur des machines virtuelles", p:['infra'], tools:['Virtualisation']},
+  {b:'B1', w:'TP', t:"Rédiger la documentation technique d'un projet : schémas, procédures et tests", p:['infra'], tools:[]}
+];
+
+/*NEWS:START*/
+const NEWS_UPDATED = '2026-11-18';
+const NEWS = [
+    {
+      "d": "2026-11-18",
+      "k": "Système",
+      "t": "Windows Server 2028 : la préversion publique est disponible, voici les nouveautés",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/windows-server-2028-preversion-publique-nouveautes/",
+      "r": "Annoncée à Microsoft Ignite 2026, la préversion apporte un Server Core durci par défaut, Trusted Launch et machines virtuelles confidentielles pour Hyper-V, NVMe activé par défaut et volume système en ReFS. La date de sortie et les prix ne sont pas connus : la tester en laboratoire via le programme Windows Server Insider, jamais en production."
+    },
+    {
+      "d": "2026-11-18",
+      "k": "Système",
+      "t": "Intune peut désormais gérer des serveurs Windows Server (préversion)",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/intune-gerer-serveurs-windows-server-preversion/",
+      "r": "Les serveurs joints à Entra ID (ou en jonction hybride) peuvent être inscrits dans Intune : configuration, conformité, applications et fenêtres de maintenance. À tester hors production, en vérifiant les affectations « All devices » et en évitant les paramètres en double avec les GPO."
+    },
+    {
+      "d": "2026-11-17",
+      "k": "Cybersécurité",
+      "t": "NoisyTCP (CVE-2026-99288) : une faille du noyau Linux fait planter un serveur à distance",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/noisytcp-cve-2026-99288-faille-noyau-linux-tcp/",
+      "r": "Une condition de concurrence dans la pile TCP, présente depuis 2015, permet à un attaquant distant de provoquer un kernel panic (déni de service, sans exécution de code démontrée). Il faut installer le noyau corrigé dès que la distribution le propose (Debian 12 et 13 le sont déjà ; correctifs amont dans les noyaux 6.12.117, 6.18.63 et 7.3.4)."
+    },
+    {
+      "d": "2026-11-17",
+      "k": "Cybersécurité",
+      "t": "Optimizely piraté : 178 organisations ont servi du code malveillant à leurs visiteurs",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/optimizely-pirate-scripts-malveillants-cnn-bbc-zoom/",
+      "r": "Le 16 novembre, des attaquants ont modifié le script de la plateforme de tests A/B Optimizely, ce qui a injecté du code volant des données de cartes bancaires et remplaçant des adresses de cryptomonnaie sur des sites comme Air France, IKEA ou Zoom. Optimizely dit avoir corrigé la faille ; il reste à surveiller ses relevés bancaires et à mettre à jour iOS (18.7.3, 26.3 ou plus)."
+    },
+    {
+      "d": "2026-11-17",
+      "k": "Système",
+      "t": "PostgreSQL : 52 failles corrigées, dont une vieille de 22 ans (CVE-2026-6460)",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/postgresql-52-failles-cve-2026-6460-mise-a-jour/",
+      "r": "Les versions 18.7, 17.12, 16.16, 15.20 et 14.25 (dernière de la branche 14, en fin de vie) corrigent 52 failles, dont une confusion de types permettant d'exécuter du code avec le compte du serveur. Il faut mettre à jour le serveur, ses extensions et les outils clients (pg_dump, pg_restore), puis redémarrer PostgreSQL."
+    },
+    {
+      "d": "2026-11-16",
+      "k": "Système",
+      "t": "Microsoft 365 : un correctif Windows défectueux à l'origine de la panne mondiale",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/panne-microsoft-365-rapport-post-incident-bug-windows/",
+      "r": "Selon le rapport préliminaire de Microsoft, un défaut de concurrence dans un correctif Windows déployé sur les passerelles réseau de Microsoft 365 a saturé plus de 80 % des serveurs, avec Exchange Online le plus touché (12-13 novembre, près de 24 h). À retenir : tester sur du matériel représentatif, garder de la capacité de réserve et pouvoir revenir en arrière vite."
+    },
+    {
+      "d": "2026-11-16",
+      "k": "Système",
+      "t": "Erreur 0x80041008 : Microsoft publie des mises à jour hors bande pour l'activation",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/windows-mise-a-jour-hors-bande-activation-slmgr-080041008/",
+      "r": "Microsoft a publié le 13 novembre des correctifs optionnels (par exemple KB5136489 pour Windows Server 2025 et KB5136487 pour Server 2022) qui réparent slmgr.vbs /ipk et /skms-domain. À installer seulement si les scripts de déploiement ou la configuration KMS sont concernés ; disponibles sur le Catalogue Microsoft Update."
+    },
+    {
+      "d": "2026-11-14",
+      "k": "Cybersécurité",
+      "t": "Check Point : passerelles piratées via PHP2Shell, avec porte dérobée et wiper ESXi",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/check-point-php2shell-wiper-esxi-tsga/",
+      "r": "Des attaquants ont exploité PHP2Shell (CVE-2026-109618 et CVE-2026-109619) sur le portail VPN SSL Mobile Access de passerelles Check Point, pris le contrôle root, installé la porte dérobée TSGA, puis rebondi en SSH vers un hôte VMware ESXi pour lancer un wiper. Il faut installer le Jumbo Hotfix de novembre sur les serveurs de gestion et les passerelles, en commençant par les portails exposés sur Internet."
+    },
+    {
+      "d": "2026-11-13",
+      "k": "Système",
+      "t": "Windows : les mises à jour de novembre font échouer l'activation (erreur 0x80041008)",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/windows-activation-slmgr-erreur-080041008/",
+      "r": "Depuis les mises à jour du 10 novembre, slmgr.vbs /ipk et /skms-domain échouent sur Windows 10 22H2, Windows 11 23H2 et Windows Server 2019, 2022 et 2025 ; les machines déjà activées ne sont pas touchées. Microsoft annonce un correctif sans date : en attendant, vérifier les scripts de déploiement qui utilisent ces commandes."
+    },
+    {
+      "d": "2026-11-12",
+      "k": "Système",
+      "t": "Xen Orchestra : une faille critique déjà exploitée menace les hôtes XCP-ng",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/xen-orchestra-faille-critique-vsa-2026-062-exploitee/",
+      "r": "Un cookie d'authentification forgé suffit pour obtenir les droits d'administrateur sur l'API REST de Xen Orchestra, ce qui peut mener à la prise de contrôle d'un hôte XCP-ng ; la faille est activement exploitée. Il faut passer en XOA 6.10.1 (ou 6.9.2 en stable), ne jamais exposer l'interface sur Internet et chercher des traces de compromission."
+    },
+    {
+      "d": "2026-11-12",
+      "k": "Cybersécurité",
+      "t": "Apache : une faille critique dans HTTP/2 permet l'exécution de code à distance",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/faille-apache-http2-cve-2026-119618-rce/",
+      "r": "La CVE-2026-119618 (CVSS 9,8 selon Red Hat) touche le module mod_http2 d'Apache HTTP Server 2.4.55 à 2.4.70, uniquement si HTTP/2 est activé, et peut permettre d'exécuter du code sans authentification. Il faut passer en 2.4.71 ou, en attendant, désactiver HTTP/2 (a2dismod http2)."
+    },
+    {
+      "d": "2026-11-12",
+      "k": "Cybersécurité",
+      "t": "NAS Synology : deux failles de DSM exploitables sans authentification",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/nas-synology-dsm-failles-sans-authentification-novembre-2026/",
+      "r": "Synology corrige une injection SQL critique dans l'API d'authentification de DSM (CVE-2026-76954, CVSS 9,8) et un contournement d'authentification dans rsync, plus 25 autres failles. Il faut installer au minimum DSM 7.4.1-90080-1, 7.3.2-86009-5, 7.2.2-72806-10 ou 7.2.1-69057-13."
+    },
+    {
+      "d": "2026-11-12",
+      "k": "Système",
+      "t": "SQL Server lent après les mises à jour Windows : Microsoft confirme le bug",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/sql-server-serveurs-lies-connexions-ouvertes-mises-a-jour-windows/",
+      "r": "Depuis les mises à jour du 13 octobre, les connexions des serveurs liés (fournisseurs OLE DB, ex. Oracle ou PostgreSQL) restent ouvertes et s'accumulent, ce qui ralentit SQL Server. Pas de correctif pour l'instant (une mise à jour hors bande est annoncée) : fermer les connexions inactives ou redémarrer le service en attendant."
+    },
+    {
+      "d": "2026-11-11",
+      "k": "Système",
+      "t": "Patch Tuesday de novembre 2026 : 1 093 failles corrigées, dont un zero-day Outlook",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/patch-tuesday-novembre-2026-recapitulatif/",
+      "r": "Microsoft corrige 1 093 failles, dont un zero-day exploité dans Outlook (CVE-2026-124194, fuite de hash NTLMv2) et une exécution de code à distance critique sur LDAP des contrôleurs de domaine (CVE-2026-119958, CVSS 9,8). Ordre conseillé : postes (Office), contrôleurs de domaine, serveurs Exchange, puis hôtes Hyper-V."
+    },
+    {
+      "d": "2026-11-10",
+      "k": "Système",
+      "t": "Windows 11 : le Patch Tuesday de novembre corrige une faille Outlook exploitée",
+      "s": "Le Crabe Info",
+      "u": "https://lecrabeinfo.net/mises-a-jour-windows/windows-11-kb5132061-novembre-2026/",
+      "r": "La mise à jour KB5132061 corrige une faille zero-day exploitée dans Outlook (CVE-2026-124194, vol de hash NTLMv2) et renforce NTLM par défaut. PowerShell contrôle aussi plus strictement la signature des scripts : réenregistrer et resigner les scripts en UTF-8 avec BOM."
+    },
+    {
+      "d": "2026-11-10",
+      "k": "Cybersécurité",
+      "t": "Faux support IT sur Teams : moins de 15 minutes entre la réponse et le malware",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/teams-faux-support-it-email-bombing/",
+      "r": "Arctic Wolf décrit une attaque sans faille logicielle : email bombing, faux technicien contactant la victime sur Teams, puis prise en main à distance (Quick Assist, AnyDesk). Il faut revoir l'accès externe de Teams dans le centre d'administration et limiter les contacts externes à une liste de domaines partenaires."
+    },
+    {
+      "d": "2026-11-09",
+      "k": "Réseau",
+      "t": "SonicWall : une faille du VPN SSL permet de contourner le MFA, et elle est exploitée",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/sonicwall-vpn-ssl-faille-saml-mfa-cve-2026-19868/",
+      "r": "La CVE-2026-19868 permet, sur les pare-feu SonicWall dont le VPN SSL utilise SAML, de contourner l'authentification SAML et son MFA avec des identifiants valides d'une autre méthode ; l'exploitation est confirmée et il n'existe aucun contournement. Il faut passer en SonicOS 7.3.4-7013 (Gen7) ou 8.2.3-8015 (Gen8)."
+    },
+    {
+      "d": "2026-11-06",
+      "k": "Système",
+      "t": "*sshole : un mot de passe trop long ouvre l'accès root via SSH sur Alpine Linux",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/faille-openssh-musl-sshhole-alpine-linux/",
+      "r": "La CVE-2026-123158 (CVSS 8,1) permet à un mot de passe de 257 à 1 024 caractères de contourner le verrouillage de comptes comme root sur OpenSSH avec musl sans PAM (Alpine, OpenWrt, Buildroot, Yocto). Il faut mettre OpenSSH à jour (10.6p2 ou correctif Alpine) ou désactiver PasswordAuthentication en gardant l'accès par clé."
+    },
+    {
+      "d": "2026-11-05",
+      "k": "Système",
+      "t": "Linux : une faille dans APT permet de remplacer un paquet signé et de l'exécuter en root",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/faille-apt-cve-2026-109518-debian-ubuntu-root/",
+      "r": "La CVE-2026-109518 permet à un attaquant capable de manipuler le trafic HTTP (proxy ou miroir malveillant) de faire écraser un paquet déjà vérifié par APT, d'où une exécution de code en root sur Debian, Ubuntu et dérivées. Il faut mettre APT à jour en désactivant les reprises (apt upgrade -o Acquire::Retries=0) et utiliser des miroirs officiels en HTTPS."
+    },
+    {
+      "d": "2026-11-02",
+      "k": "Cybersécurité",
+      "t": "Noyau Linux : faille TCP critique (CVE-2026-98432), accès root à distance",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/cve-2026-98432-faille-noyau-linux-tcp-root-distance/",
+      "r": "Un use-after-free dans l'établissement des connexions TCP IPv4 (CVSS 9,8) touche le noyau depuis la 4.4, surtout les serveurs avec un écouteur MPTCP ; aucune exploitation constatée à la publication. Il faut installer le noyau corrigé de sa distribution et redémarrer, ou désactiver MPTCP (net.mptcp.enabled=0) en attendant."
+    }
+  ];
+/*NEWS:END*/
+
+/* ---------- rendering ---------- */
+const $ = id => document.getElementById(id);
+
+const grid = $('pgrid');
+grid.innerHTML = PROJECTS.map(p => `<li><button type="button" class="pcard" data-open="${p.id}" data-cat="${p.cat}">
+  <span class="pc-top"><span class="pill">${icon(CATS[p.cat].icon)}${CATS[p.cat].label}</span><span class="mono dim" style="font-size:12px">${p.ctx}</span></span>
+  <span class="pc-title">${p.title}</span>
+  <span class="pc-sum">${p.summary}</span>
+  <span class="tags">${p.stack.slice(0,4).map(t => `<span class="tag">${t}</span>`).join('')}</span>
+  <span class="pc-go">Voir le détail <span aria-hidden="true">→</span></span>
+</button></li>`).join('');
+
+const fwrap = $('filters');
+const usedCats = new Set(PROJECTS.map(p => p.cat));
+const filters = usedCats.size > 1 ? [['all','Tous'], ...Object.entries(CATS).filter(([k]) => usedCats.has(k)).map(([k,v]) => [k, v.label])] : [];
+fwrap.innerHTML = filters.map(([k,l]) => {
+  const n = k === 'all' ? PROJECTS.length : PROJECTS.filter(p => p.cat === k).length;
+  return `<button type="button" class="chip" data-f="${k}" aria-pressed="${k === 'all'}">${l}<span class="n">${n}</span></button>`;
+}).join('') + `<span class="count" id="count" aria-live="polite">${PROJECTS.length} ${PROJECTS.length > 1 ? 'projets' : 'projet'}</span>`;
+fwrap.addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  const f = b.dataset.f; let n = 0;
+  fwrap.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+  grid.querySelectorAll('li').forEach(li => {
+    const show = f === 'all' || li.firstElementChild.dataset.cat === f;
+    li.hidden = !show; if (show) n++;
+  });
+  $('count').textContent = n + (n > 1 ? ' projets' : ' projet');
+});
+
+const meter = l => `<span class="meter" role="img" aria-label="Niveau : ${LV[l-1]}" title="${LV[l-1]}">${[1,2,3].map(i => `<i class="${i <= l ? 'on' : ''}"></i>`).join('')}</span>`;
+$('sgrid').innerHTML = SKILLS.map(s => `<div class="sgroup"><h4>${icon(s.i)}${s.g}</h4><ul>${s.items.map(([n,l]) => `<li><span>${n}</span>${meter(l)}</li>`).join('')}</ul></div>`).join('');
+
+const LVL = {};
+SKILLS.forEach(g => g.items.forEach(([n, l]) => { LVL[n] = l; }));
+const toolChip = n => `<span class="atool">${n}${LVL[n] ? meter(LVL[n]) : ''}</span>`;
+const projUsed = new Set(ACQUIS.flatMap(a => a.p));
+$('acqmeta').textContent = ACQUIS.length + ' acquis, prouvés par ' + projUsed.size + (projUsed.size > 1 ? ' projets' : ' projet');
+$('acq').innerHTML = BLOCS.map(b => {
+  const rows = ACQUIS.filter(a => a.b === b.k);
+  if (!rows.length) return '';
+  return `<div class="bloc"><h4 class="bloc-t"><span class="mono">Bloc ${b.k.slice(1)}</span>${b.t}</h4><ul class="acq">${rows.map(a => `<li><div class="aq-main"><span class="aq-t">${a.t}</span><div class="aq-meta"><span class="ctx">${a.w}</span>${(a.tools || []).map(toolChip).join('')}</div></div><span class="chips">${a.p.map(id => `<button type="button" class="lchip" data-open="${id}">${PROJECTS.find(p => p.id === id).short}</button>`).join('')}</span></li>`).join('')}</ul></div>`;
+}).join('');
+
+const esc = v => String(v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmtDate = d => new Date(d + 'T12:00:00').toLocaleDateString('fr-FR', {day:'numeric', month:'long', year:'numeric'});
+const feed = [...NEWS].sort((a, b) => b.d.localeCompare(a.d)).slice(0, 12);
+$('feedmeta').textContent = 'Dernière mise à jour le ' + fmtDate(NEWS_UPDATED) + ' · ' + NEWS.length + ' actus suivies';
+$('vgrid').innerHTML = feed.map(n => {
+  const safe = /^https?:\/\//.test(n.u) ? esc(n.u) : '#';
+  return `<article class="vcard"><div class="vtop"><span class="pill">${esc(n.k)}</span><time class="mono dim" datetime="${esc(n.d)}">${fmtDate(n.d)}</time></div><h4>${esc(n.t)}</h4><p>${esc(n.r)}</p><a class="vsrc" href="${safe}" target="_blank" rel="noopener noreferrer">${esc(n.s)} ↗</a></article>`;
+}).join('');
+
+/* ---------- project panel ---------- */
+const panel = $('panel'), scrim = $('scrim');
+let lastFocus = null, closing = 0;
+function openProject(id, trigger) {
+  const p = PROJECTS.find(x => x.id === id); if (!p) return;
+  clearTimeout(closing);
+  lastFocus = trigger || document.activeElement;
+  panel.innerHTML = `<div class="pn-head"><div class="pn-meta"><span class="pill">${icon(CATS[p.cat].icon)}${CATS[p.cat].label}</span><span class="mono dim">${p.ctx}${p.date ? ' · ' + p.date : ''}</span></div>
+    <button type="button" class="close" aria-label="Fermer le détail"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <h3 id="panel-title">${p.title}</h3>
+    <p class="pn-sum">${p.summary}</p>
+    <h4>Objectif</h4><p>${p.objective}</p>
+    ${p.arch ? `<h4>Architecture</h4><p>${p.arch}</p>` : ''}
+    <h4>Ce que j'ai réalisé</h4><ul class="steps">${p.done.map(d => `<li>${d}</li>`).join('')}</ul>
+    ${p.tests ? `<h4>Tests de validation</h4><ul class="steps">${p.tests.map(d => `<li>${d}</li>`).join('')}</ul>` : ''}
+    ${p.issues ? `<h4>Difficultés rencontrées</h4><ul class="steps">${p.issues.map(d => `<li>${d}</li>`).join('')}</ul>` : ''}
+    <h4>Résultat</h4><p>${p.result}</p>
+    <h4>Technologies</h4><div class="tags">${p.stack.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+    <h4>Compétences mobilisées</h4><div class="tags">${p.skills.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+    <div class="pn-doc">${p.pdf ? `<a class="btn primary" href="${p.pdf}" target="_blank" rel="noopener noreferrer">Ouvrir le rapport de TP (PDF) ↗</a>` : `<button type="button" class="btn" disabled>Rapport de TP (PDF) à ajouter</button>`}</div>`;
+  panel.scrollTop = 0;
+  panel.hidden = false; scrim.hidden = false;
+  requestAnimationFrame(() => { panel.classList.add('open'); scrim.classList.add('open'); });
+  document.body.style.overflow = 'hidden';
+  panel.querySelector('.close').focus();
+}
+function closePanel() {
+  if (panel.hidden) return;
+  panel.classList.remove('open'); scrim.classList.remove('open');
+  document.body.style.overflow = '';
+  closing = setTimeout(() => { panel.hidden = true; scrim.hidden = true; }, 260);
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+document.addEventListener('click', e => {
+  const o = e.target.closest('[data-open]');
+  if (o) { openProject(o.dataset.open, o); return; }
+  if (e.target.closest('.close') || e.target === scrim) closePanel();
+});
+document.addEventListener('keydown', e => {
+  if (panel.hidden) return;
+  if (e.key === 'Escape') { closePanel(); return; }
+  if (e.key === 'Tab') {
+    const f = [...panel.querySelectorAll('button:not([disabled]),a[href]')];
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+
+/* ---------- nav, banner, theme ---------- */
+
+/* ---------- fenêtre du terminal ---------- */
+(function () {
+  const term = document.querySelector('.term'); if (!term) return;
+  const body = term.querySelector('pre');
+  const closeBtn = term.querySelector('.l-close');
+  const reopen = document.createElement('button');
+  reopen.type = 'button'; reopen.className = 'btn term-reopen'; reopen.hidden = true;
+  reopen.textContent = '$ Rouvrir le terminal';
+  term.after(reopen);
+  closeBtn.addEventListener('click', () => { term.hidden = true; reopen.hidden = false; reopen.focus(); });
+  reopen.addEventListener('click', () => { term.hidden = false; reopen.hidden = true; closeBtn.focus(); });
+  term.querySelector('.l-min').addEventListener('click', () => { body.hidden = !body.hidden; });
+  term.querySelector('.l-max').addEventListener('click', () => { body.hidden = false; term.classList.toggle('big'); });
+})();
+
+/* ---------- méthode : étapes à glisser ---------- */
+(function () {
+  const tr = $('mtrack'); if (!tr) return;
+  const slides = [...tr.children], btns = [];
+  const dots = $('mdots'), N = slides.length;
+  slides.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'dot'; b.setAttribute('aria-label', 'Étape ' + (i + 1));
+    b.addEventListener('click', () => go(i));
+    dots.appendChild(b); btns.push(b);
+  });
+  let cur = 0;
+  function idx() {
+    if (tr.scrollLeft >= tr.scrollWidth - tr.clientWidth - 2) return N - 1;
+    const step = slides[1].offsetLeft - slides[0].offsetLeft;
+    return Math.max(0, Math.min(N - 1, Math.round(tr.scrollLeft / step)));
+  }
+  function paint() {
+    cur = idx();
+    btns.forEach((b, i) => b.setAttribute('aria-current', String(i === cur)));
+    $('mcount').textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(N).padStart(2, '0');
+    $('mprev').disabled = cur === 0; $('mnext').disabled = cur === N - 1;
+  }
+  function go(i) {
+    i = Math.max(0, Math.min(N - 1, i));
+    tr.scrollTo({left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: reduce.matches ? 'auto' : 'smooth'});
+  }
+  let raf = 0;
+  tr.addEventListener('scroll', () => { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; paint(); }); }, {passive: true});
+  $('mprev').addEventListener('click', () => go(cur - 1));
+  $('mnext').addEventListener('click', () => go(cur + 1));
+  tr.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+  });
+  addEventListener('resize', paint);
+  paint();
+})();
+
+const navLinks = [...document.querySelectorAll('.links a')];
+function setNav(id) { navLinks.forEach(a => a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + id))); }
+const io = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (e.isIntersecting) { setNav(e.target.id); return; }
+    if (e.target.id === 'veille' && e.boundingClientRect.top > 0) setNav('competences');
+  });
+}, {rootMargin:'-40% 0px -55% 0px'});
+['presentation','projets','competences','veille'].forEach(id => io.observe($(id)));
+
+function effectiveTheme() {
+  return root.dataset.theme || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+}
+$('theme').addEventListener('click', () => {
+  root.dataset.theme = effectiveTheme() === 'dark' ? 'light' : 'dark';
+});
+const refreshNet = () => { if (window.__netColors) window.__netColors(); };
+new MutationObserver(refreshNet).observe(root, {attributes:true, attributeFilter:['data-theme']});
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', refreshNet);
+
+/* ---------- typed focus line ---------- */
+(function () {
+  const el = $('typed');
+  const words = ['réseaux et infrastructure','systèmes Windows et Linux','sécurité et sauvegardes','scripts et automatisation'];
+  if (!el || reduce.matches) return;
+  let w = 0, c = 0, del = false;
+  function tick() {
+    const word = words[w];
+    el.textContent = word.slice(0, c);
+    if (!del && c < word.length) { c++; setTimeout(tick, 55); }
+    else if (!del) { del = true; setTimeout(tick, 1500); }
+    else if (c > 0) { c--; setTimeout(tick, 26); }
+    else { del = false; w = (w + 1) % words.length; setTimeout(tick, 320); }
+  }
+  setTimeout(tick, 1800);
+})();
+
+/* ---------- network canvas ---------- */
+(function () {
+  const cv = $('net');
+  const ctx = cv.getContext('2d'); if (!ctx) return;
+  const LINK = 150, mouse = {x:-9999, y:-9999};
+  let W = 0, H = 0, nodes = [], pulses = [], rgb = '147,161,183', accent = '#ff6a3d';
+  let raf = 0, visible = true, last = 0, nextPulse = 0, pending = 0;
+
+  function colors() {
+    const s = getComputedStyle(root);
+    rgb = s.getPropertyValue('--net-rgb').trim() || rgb;
+    accent = s.getPropertyValue('--accent').trim() || accent;
+  }
+  function size() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.max(16, Math.min(58, Math.round(W * H / 17000)));
+    while (nodes.length < n) nodes.push({x:Math.random() * W, y:Math.random() * H, vx:(Math.random() - .5) * .28, vy:(Math.random() - .5) * .28, r:1.4 + Math.random() * 1.6});
+    nodes.length = n;
+    nodes.forEach(o => { o.x = Math.min(o.x, W); o.y = Math.min(o.y, H); });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 1;
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < LINK) {
+          ctx.strokeStyle = `rgba(${rgb},${(1 - d / LINK) * .34})`;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(o => {
+      ctx.fillStyle = `rgba(${rgb},.75)`;
+      ctx.beginPath(); ctx.arc(o.x, o.y, o.r, 0, 6.283); ctx.fill();
+      const dm = Math.hypot(o.x - mouse.x, o.y - mouse.y);
+      if (dm < 150) {
+        ctx.strokeStyle = accent; ctx.globalAlpha = (1 - dm / 150) * .7;
+        ctx.beginPath(); ctx.moveTo(o.x, o.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+        ctx.globalAlpha = 1;
+      }
+    });
+    pulses.forEach(p => {
+      const a = nodes[p.a], b = nodes[p.b]; if (!a || !b) return;
+      const x = a.x + (b.x - a.x) * p.t, y = a.y + (b.y - a.y) * p.t;
+      ctx.fillStyle = accent;
+      ctx.globalAlpha = .25; ctx.beginPath(); ctx.arc(x, y, 7, 0, 6.283); ctx.fill();
+      ctx.globalAlpha = 1; ctx.beginPath(); ctx.arc(x, y, 2.6, 0, 6.283); ctx.fill();
+    });
+  }
+  function step(t) {
+    const dt = Math.min(32, (t - last) || 16); last = t;
+    const k = dt / 16;
+    nodes.forEach(o => {
+      o.x += o.vx * k; o.y += o.vy * k;
+      if (o.x < 0 || o.x > W) o.vx *= -1;
+      if (o.y < 0 || o.y > H) o.vy *= -1;
+    });
+    if (t > nextPulse && nodes.length && pulses.length < 4) {
+      const a = Math.floor(Math.random() * nodes.length); let bi = -1, bd = LINK;
+      for (let j = 0; j < nodes.length; j++) {
+        if (j === a) continue;
+        const d = Math.hypot(nodes[a].x - nodes[j].x, nodes[a].y - nodes[j].y);
+        if (d < bd) { bd = d; bi = j; }
+      }
+      if (bi >= 0) pulses.push({a, b:bi, t:0});
+      nextPulse = t + 700 + Math.random() * 900;
+    }
+    pulses.forEach(p => { p.t += dt / 900; });
+    pulses = pulses.filter(p => p.t < 1);
+    draw();
+  }
+  function loop(t) { step(t); raf = requestAnimationFrame(loop); }
+  function start() { if (raf || reduce.matches || !visible || document.hidden) return; last = 0; raf = requestAnimationFrame(loop); }
+  function stop() { cancelAnimationFrame(raf); raf = 0; }
+  function refresh() { colors(); size(); draw(); }
+
+  document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+  document.addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  document.documentElement.addEventListener('mouseleave', () => { mouse.x = mouse.y = -9999; });
+  addEventListener('resize', () => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; refresh(); }); });
+  reduce.addEventListener('change', () => { reduce.matches ? (stop(), draw()) : start(); });
+  window.__netColors = () => { colors(); if (!raf) draw(); };
+  refresh(); start();
+})();
+</script>
+
+</body></html>
