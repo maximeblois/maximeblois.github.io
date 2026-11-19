@@ -265,7 +265,8 @@ footer p{margin-top:12px;color:var(--muted);font-size:14px}
 .panel h4{font-family:var(--mono);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin:26px 0 8px}
 .steps li{position:relative;padding:6px 0 6px 22px}
 .steps li::before{content:"›";position:absolute;left:4px;color:var(--accent);font-weight:700}
-.pn-doc{margin-top:30px}
+.pn-doc{margin-top:30px;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.pn-team{font-size:12px;color:var(--accent);margin-bottom:4px}
 
 @media (max-width:900px){
   .hero-grid,.about-grid,footer .wrap{grid-template-columns:minmax(0,1fr)}
@@ -478,7 +479,7 @@ const CATS = {
 };
 
 const PROJECTS = [
-  {id:'infra', short:'Mini-infrastructure', cat:'systeme', ctx:'TP', date:'18 novembre 2026',
+  {id:'infra', short:'Mini-infrastructure', cat:'systeme', ctx:'TP', date:'18 novembre 2026', team:'Réalisé en binôme avec Adam Bellanger',
    title:'Mini-infrastructure d\'entreprise virtualisée',
    summary:'Un pare-feu pfSense, un contrôleur de domaine Windows Server 2025 et un poste client Windows 11, le tout sous Hyper-V.',
    stack:['Hyper-V','pfSense','Windows Server 2025','Windows 11 Pro','AD DS','DNS','DHCP','GPO'],
@@ -505,7 +506,92 @@ const PROJECTS = [
      'Groupe absent de gpresult : l\'appartenance aux groupes n\'est lue qu\'à l\'ouverture de session, une reconnexion suffit'],
    result:'L\'infrastructure fonctionne de bout en bout : pfSense route et fait le NAT, SRV-DC01 fournit l\'annuaire, le DNS et le DHCP, et le poste joint au domaine applique la GPO de l\'utilisateur. Tous les tests de validation sont réussis.',
    skills:['Virtualisation','Active Directory','GPO','DHCP et DNS','pfSense','Documentation technique'],
-   pdf:'rapport-tp-mini-infrastructure.pdf'}
+   docs:[{l:'Compte rendu de TP', u:'rapport-tp-mini-infrastructure.pdf'}]},
+
+  {id:'hyperv', short:'Labo Hyper-V', cat:'systeme', ctx:'TP', team:'Réalisé en binôme avec Adam Bellanger',
+   title:'Laboratoire Iris Services sous Hyper-V',
+   summary:'Un lab d\'entreprise fictive : hyperviseur et réseau NAT, serveurs déployés par disques différentiels, puis annuaire Active Directory peuplé par script.',
+   stack:['Hyper-V','Windows Server 2025','Server Core','PowerShell','Sysprep','VHDX différentiels','AD DS','DNS'],
+   objective:'Monter la maquette de l\'entreprise fictive Iris Services (BTS SIO, IRIS Rouen) sur Hyper-V : activer l\'hyperviseur et un réseau NAT, déployer rapidement les serveurs, puis installer l\'annuaire Active Directory du domaine IRIS.local.',
+   arch:'Réseau NAT 192.168.140.0/24 (commutateur vSwitch-NAT, passerelle 192.168.140.1). DC1 (AD DS et DNS, 192.168.140.10) en Server Core, FS1 (192.168.140.13, cible iSCSI et DFS), NODE1 et NODE2 (192.168.140.11 et .12, futurs nœuds de cluster Hyper-V imbriqués).',
+   done:[
+     'TP1 : prérequis de virtualisation, activation d\'Hyper-V, commutateur interne vSwitch-NAT avec règle NAT (New-NetNat), VM du contrôleur en génération 2 sous Windows Server 2025, point de contrôle de référence',
+     'TP2 : disque modèle généralisé avec Sysprep puis mis en lecture seule, disques différentiels pour FS1, NODE1 et NODE2 : trois serveurs qui occupent à peine plus de place qu\'un seul',
+     'TP2 : création des trois VM en PowerShell, disques de données de FS1, mémoire statique sur les nœuds pour la virtualisation imbriquée',
+     'TP3 : promotion de DC1 en premier contrôleur du domaine IRIS.local avec Install-ADDSForest',
+     'TP3 : script PowerShell d\'import qui crée les unités d\'organisation par service, les groupes de sécurité et les 53 comptes depuis un fichier CSV',
+     'TP3 : cas particuliers traités : login en double (m.dubois2), prestataire externe isolé dans une OU dédiée, compte de stagiaire avec date d\'expiration automatique'],
+   tests:[
+     'Connectivité testée dans les deux sens entre le poste hôte et le serveur (TP1)',
+     'Services NTDS, DNS et Netlogon démarrés, résolution DNS de IRIS.local et rôles FSMO présents sur DC1 (TP3)',
+     'Vérifications après l\'import des 53 comptes (TP3)'],
+   issues:[
+     'Commutateur virtuel en double qui bloquait la création de la VM, démarrage sur l\'ISO raté au premier essai et point de contrôle du mauvais type (TP1)',
+     'Échecs répétés de Sysprep : analyse du journal setuperr.log, deux causes corrigées dans le registre (TP2)',
+     'VM de génération 2 créées en PowerShell sans ordre de démarrage, repérées avec Get-VMFirmware (TP2)',
+     'Install-ADDSForest en échec avec des erreurs changeantes : le journal dcpromoui.log a montré que la première promotion avait en réalité réussi (TP3)',
+     'Limite assumée : Hyper-V crée des points de contrôle standard malgré le réglage « production », cause non établie (TP2)'],
+   result:'Le laboratoire est opérationnel : réseau NAT, trois serveurs déployés par disques différentiels et un domaine IRIS.local avec ses 53 comptes. Il est prêt pour la suite : jonction des serveurs au domaine, GPO par service et second contrôleur de domaine.',
+   skills:['Virtualisation','Active Directory','PowerShell','Documentation technique'],
+   docs:[{l:'TP1, Hyper-V et contrôleur de domaine', u:'rapports/hyperv-tp1-activation-dc.pdf'},{l:'TP2, déploiement des serveurs', u:'rapports/hyperv-tp2-deploiement-serveurs.pdf'},{l:'TP3, Active Directory et import des comptes', u:'rapports/hyperv-tp3-active-directory.pdf'}]},
+
+  {id:'linux', short:'Services Linux', cat:'reseau', ctx:'TP', date:'septembre 2026', team:'Réalisé en binôme avec Adam Bellanger',
+   title:'Serveurs Linux : DHCP, DNS, SSH et sites web en HTTPS',
+   summary:'Un serveur Debian qui distribue les adresses, résout les noms du domaine, s\'administre par clé SSH et héberge deux sites web dont un intranet en HTTPS.',
+   stack:['Debian 12','isc-dhcp-server','bind9','OpenSSH','Apache','Nginx','PHP','VMware Workstation'],
+   objective:'Mettre en place l\'infrastructure réseau d\'un lab sous VMware : DHCP et DNS sur un serveur Debian 12, un client de test, puis deux sites web publiés dont un intranet protégé en HTTPS.',
+   arch:'Réseau VMnet2 192.168.100.0/24 (DHCP de VMware désactivé), domaine bts-sio.lan. srv-linux (192.168.100.10) porte DHCP, DNS, SSH, Apache et Nginx. cli-linux, cloné, reçoit 192.168.100.50 par réservation DHCP. Le poste Windows sert de client de test.',
+   done:[
+     'Deux VM Debian 12 installées sous VMware Workstation, adresse statique sur le serveur, clone pour le client',
+     'Serveur DHCP isc-dhcp-server : plage, options et réservation d\'adresse pour le client',
+     'Serveur DNS bind9 : zone directe bts-sio.lan et zone inverse, forwarders et cache, contrôles avec dig',
+     'SSH durci : connexion par clé uniquement, un seul utilisateur autorisé, lecture des journaux d\'authentification',
+     'Apache : deux hôtes virtuels (site public et intranet) sur une seule adresse IP, intranet restreint par adresse IP puis par mot de passe',
+     'Intranet publié en HTTPS avec un certificat auto-signé et redirection depuis HTTP ; démonstration Certbot analysée, faute de domaine public',
+     'Page PHP dynamique avec formulaire, et Nginx installé en parallèle d\'Apache sur le port 8080 pour comparer les deux configurations',
+     'Pare-feu activé en laissant passer SSH, HTTP, HTTPS et le port 8080'],
+   tests:[
+     'Le client reçoit son adresse par DHCP et résout les noms du domaine en direct et en inverse',
+     'Connexion SSH par clé depuis le client Linux et depuis le poste Windows',
+     'Sites testés avec curl puis avec le navigateur Windows : accès refusé (401) sans bon mot de passe, HTTPS fonctionnel',
+     'Port fermé par le pare-feu (silence) distingué d\'un port sans service à l\'écoute (refus explicite)'],
+   issues:[
+     'Sudo absent sur Debian quand un mot de passe root est défini à l\'installation : à installer et à configurer à la main',
+     'Numéro de série de la zone DNS non incrémenté, visible seulement dans un avertissement du journal',
+     'Nginx refusait de démarrer car Apache occupait déjà le port 80 : déplacé sur le port 8080'],
+   todo:[
+     'TP1 : diagnostic des trois pannes volontaires (partie G) pas encore réalisé',
+     'TP2 : sorties de commandes de certaines parties encore à ajouter au compte rendu'],
+   result:'srv-linux distribue les adresses, résout les noms du domaine, n\'accepte plus que l\'administration par clé SSH et héberge deux sites dont l\'intranet est protégé et chiffré. Nginx tourne en parallèle sur le port 8080.',
+   skills:['Linux Debian','DHCP et DNS','SSH','Apache','Nginx','HTTPS'],
+   docs:[{l:'TP1, DHCP, DNS et SSH', u:'rapports/linux-tp1-dhcp-dns-ssh.pdf'},{l:'TP2, Apache, HTTPS et Nginx', u:'rapports/linux-tp2-apache-https.pdf'}]},
+
+  {id:'opnsense', short:'OPNsense', cat:'securite', ctx:'TP', date:'8 octobre 2026', team:'Réalisé en binôme avec Adam Bellanger',
+   title:'Pare-feu OPNsense : LAN, DMZ et publication d\'un site',
+   summary:'Un pare-feu à trois zones qui filtre le LAN, isole une DMZ et publie un site web, validé par une recette de 8 tests.',
+   stack:['OPNsense 26.7','VMware Workstation','Debian 13','Apache','NAT','DMZ'],
+   objective:'Sécuriser le réseau de LogiNord, PME fictive de transport : le LAN n\'accède qu\'au web et au DNS du pare-feu, le site vitrine est joignable depuis Internet, la DMZ ne joint jamais le LAN, les sites non professionnels sont bloqués et tracés, et l\'administration n\'est accessible que depuis le LAN.',
+   arch:'WAN sur VMnet8 (NAT, 192.168.100.0/24), LAN sur VMnet2 (192.168.10.0/24, DHCP du pare-feu) et DMZ sur VMnet3 (172.16.10.0/24). Un client Debian dans le LAN, un serveur web Debian avec Apache dans la DMZ (172.16.10.10).',
+   done:[
+     'Trois cartes réseau virtuelles, installation d\'OPNsense et adressage des zones WAN, LAN et DMZ',
+     'Politique du LAN : DNS du pare-feu, ping et web (alias Ports_Web) autorisés, tout le reste bloqué et journalisé ; règles par défaut désactivées sans être supprimées',
+     'DMZ : règles qui interdisent tout accès au LAN, serveur Apache en 172.16.10.10',
+     'Publication du site par redirection de port (DNAT) depuis le WAN vers la DMZ',
+     'Blocage des sites non professionnels par DNS avec journalisation, journaux consultés en direct (Live View)',
+     'Administration limitée au LAN, puis sauvegarde de la configuration'],
+   tests:[
+     'Politique du LAN, 5 tests : navigation HTTPS et DNS par le pare-feu autorisés, DNS direct vers l\'extérieur et SSH vers Internet refusés, ping autorisé',
+     'Recette de la DMZ et de la publication, 8 tests conformes au cahier des charges'],
+   issues:[
+     'Interface web injoignable depuis le PC hôte (VMnet2 sans carte sur l\'hôte, voulu) : tout se règle depuis le client du LAN',
+     'Assistant de configuration bloqué sur l\'écran WAN : réglages faits à la main',
+     'Premier curl bloqué : le site répondait d\'abord en IPv6, sans route côté WAN (option -4)',
+     'Option « Add associated filter rule » devenue le champ Firewall rule dans OPNsense 26.7 : règle de publication créée à la main sur le WAN'],
+   todo:[
+     'Mesurer et noter les temps de réponse des règles Block et Reject (à compléter dans le compte rendu)'],
+   result:'Les cinq tests de la politique du LAN et les huit tests de la recette sont conformes : le LAN n\'accède qu\'au web et au DNS du pare-feu, le site est joignable depuis Internet, la DMZ ne joint jamais le LAN et l\'administration reste limitée au LAN.',
+   skills:['Filtrage de flux','NAT et DMZ','Journalisation','Virtualisation'],
+   docs:[{l:'Compte rendu de TP', u:'rapports/opnsense-pare-feu-dmz.pdf'}]}
 ];
 
 const LV = ['Notions','Appliqué','Autonome'];
@@ -522,10 +608,16 @@ const BLOCS = [
   {k:'B3', t:"Cybersécurité des services informatiques"}
 ];
 const ACQUIS = [
-  {b:'B2', w:'TP', t:"Concevoir un plan d'adressage et isoler un réseau local derrière un pare-feu", p:['infra'], tools:['DHCP et DNS','pfSense']},
-  {b:'B2', w:'TP', t:"Déployer et administrer un annuaire d'entreprise", p:['infra'], tools:['Active Directory','GPO']},
-  {b:'B2', w:'TP', t:"Monter une infrastructure complète sur des machines virtuelles", p:['infra'], tools:['Virtualisation']},
-  {b:'B1', w:'TP', t:"Rédiger la documentation technique d'un projet : schémas, procédures et tests", p:['infra'], tools:[]}
+  {b:'B2', w:'TP', t:"Concevoir un plan d'adressage et isoler un réseau local derrière un pare-feu", p:['infra','opnsense'], tools:['DHCP et DNS','pfSense','OPNsense']},
+  {b:'B2', w:'TP', t:"Déployer et administrer un annuaire d'entreprise", p:['infra','hyperv'], tools:['Active Directory','GPO']},
+  {b:'B2', w:'TP', t:"Monter et industrialiser une infrastructure sur des machines virtuelles", p:['infra','hyperv','linux','opnsense'], tools:['Virtualisation']},
+  {b:'B2', w:'TP', t:"Automatiser la création de comptes avec un script", p:['hyperv'], tools:['PowerShell','Active Directory']},
+  {b:'B2', w:'TP', t:"Déployer des services réseau sous Linux : DHCP et DNS", p:['linux'], tools:['DHCP et DNS','Linux Debian']},
+  {b:'B2', w:'TP', t:"Héberger et publier des sites web sur un serveur Linux", p:['linux'], tools:['Linux Debian','Apache','Nginx']},
+  {b:'B2', w:'TP', t:"Diagnostiquer un incident à partir des journaux", p:['hyperv','linux','opnsense'], tools:[]},
+  {b:'B3', w:'TP', t:"Filtrer les flux, isoler une DMZ et publier un service", p:['opnsense'], tools:['OPNsense','Règles de filtrage (NAT, DMZ)']},
+  {b:'B3', w:'TP', t:"Sécuriser l'administration et les sites d'un serveur : clés SSH, HTTPS et pare-feu local", p:['linux'], tools:['SSH par clé','HTTPS (TLS)','UFW']},
+  {b:'B1', w:'TP', t:"Rédiger la documentation technique d'un projet : schémas, procédures et tests", p:['infra','hyperv','linux','opnsense'], tools:[]}
 ];
 
 /*NEWS:START*/
@@ -697,9 +789,10 @@ const NEWS = [
 /* ---------- rendering ---------- */
 const $ = id => document.getElementById(id);
 
+const PDFB = location.hostname.endsWith('github.io') ? '' : 'https://maximeblois.github.io/';
 const grid = $('pgrid');
 grid.innerHTML = PROJECTS.map(p => `<li><button type="button" class="pcard" data-open="${p.id}" data-cat="${p.cat}">
-  <span class="pc-top"><span class="pill">${icon(CATS[p.cat].icon)}${CATS[p.cat].label}</span><span class="mono dim" style="font-size:12px">${p.ctx}</span></span>
+  <span class="pc-top"><span class="pill">${icon(CATS[p.cat].icon)}${CATS[p.cat].label}</span><span class="mono dim" style="font-size:12px">${p.ctx}${p.team ? ' · binôme' : ''}</span></span>
   <span class="pc-title">${p.title}</span>
   <span class="pc-sum">${p.summary}</span>
   <span class="tags">${p.stack.slice(0,4).map(t => `<span class="tag">${t}</span>`).join('')}</span>
@@ -758,15 +851,17 @@ function openProject(id, trigger) {
     <button type="button" class="close" aria-label="Fermer le détail"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     <h3 id="panel-title">${p.title}</h3>
     <p class="pn-sum">${p.summary}</p>
+    ${p.team ? `<p class="pn-team mono">${p.team}</p>` : ''}
     <h4>Objectif</h4><p>${p.objective}</p>
     ${p.arch ? `<h4>Architecture</h4><p>${p.arch}</p>` : ''}
     <h4>Ce que j'ai réalisé</h4><ul class="steps">${p.done.map(d => `<li>${d}</li>`).join('')}</ul>
     ${p.tests ? `<h4>Tests de validation</h4><ul class="steps">${p.tests.map(d => `<li>${d}</li>`).join('')}</ul>` : ''}
     ${p.issues ? `<h4>Difficultés rencontrées</h4><ul class="steps">${p.issues.map(d => `<li>${d}</li>`).join('')}</ul>` : ''}
+    ${p.todo ? `<h4>Reste à faire</h4><ul class="steps">${p.todo.map(d => `<li>${d}</li>`).join('')}</ul>` : ''}
     <h4>Résultat</h4><p>${p.result}</p>
     <h4>Technologies</h4><div class="tags">${p.stack.map(t => `<span class="tag">${t}</span>`).join('')}</div>
     <h4>Compétences mobilisées</h4><div class="tags">${p.skills.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-    <div class="pn-doc">${p.pdf ? `<a class="btn primary" href="${p.pdf}" target="_blank" rel="noopener noreferrer">Ouvrir le rapport de TP (PDF) ↗</a>` : `<button type="button" class="btn" disabled>Rapport de TP (PDF) à ajouter</button>`}</div>`;
+    <div class="pn-doc">${(p.docs || []).map(d => `<a class="btn${p.docs.length === 1 ? ' primary' : ''}" href="${PDFB}${d.u}" target="_blank" rel="noopener noreferrer">${d.l} (PDF) ↗</a>`).join('')}</div>`;
   panel.scrollTop = 0;
   panel.hidden = false; scrim.hidden = false;
   requestAnimationFrame(() => { panel.classList.add('open'); scrim.classList.add('open'); });
