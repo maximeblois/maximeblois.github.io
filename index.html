@@ -529,8 +529,16 @@ const ACQUIS = [
 ];
 
 /*NEWS:START*/
-const NEWS_UPDATED = '2026-11-18';
+const NEWS_UPDATED = '2026-11-19';
 const NEWS = [
+    {
+      "d": "2026-11-19",
+      "k": "Cybersécurité",
+      "t": "PHP : mises à jour de sécurité attendues aujourd'hui pour PHP 8.2 à 8.5",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/mise-a-jour-php-faille-critique-19-novembre-2026/",
+      "r": "Les équipes PHP publient aujourd'hui des correctifs pour les branches 8.2 à 8.5, dont au moins une faille critique qui demande une configuration non standard. Il faut installer les nouvelles versions dès leur sortie ; en attendant, désactiver session.upload_progress.enabled limite le risque lié à la CVE-2026-115560."
+    },
     {
       "d": "2026-11-18",
       "k": "Système",
@@ -546,6 +554,38 @@ const NEWS = [
       "s": "IT-Connect",
       "u": "https://www.it-connect.fr/intune-gerer-serveurs-windows-server-preversion/",
       "r": "Les serveurs joints à Entra ID (ou en jonction hybride) peuvent être inscrits dans Intune : configuration, conformité, applications et fenêtres de maintenance. À tester hors production, en vérifiant les affectations « All devices » et en évitant les paramètres en double avec les GPO."
+    },
+    {
+      "d": "2026-11-18",
+      "k": "Cybersécurité",
+      "t": "NGINX2Root : deux failles critiques (HTTP/2) permettent de prendre le contrôle de NGINX",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/nginx2root-failles-cve-2026-123007-rce/",
+      "r": "Les CVE-2026-123007 et CVE-2026-123633 (CVSS 9,2) permettent une exécution de code à distance sans authentification ; aucune exploitation n'est signalée pour l'instant. Il faut passer en NGINX 1.30.7 ou 1.31.9 en commençant par les serveurs exposés, ou désactiver HTTP/2 (http2 off;) en attendant."
+    },
+    {
+      "d": "2026-11-18",
+      "k": "Cybersécurité",
+      "t": "Java4Shell (CVE-2026-114938) : faille Base64 de Java, Keycloak, Jira et Jenkins visés",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/java4shell-faille-critique-java-openjdk/",
+      "r": "Une écriture hors limites dans le décodeur Base64 de Java touche OpenJDK 17 et suivants sur les processeurs x86-64 avec AVX-512 VBMI (ARM64 et Java 8/11 non concernés). Il faut passer en 17.0.21.1, 21.0.13.1, 25.0.5.1 ou 27.0.1.1 et redémarrer les services, en priorité ceux exposés sur Internet."
+    },
+    {
+      "d": "2026-11-18",
+      "k": "Système",
+      "t": "Windows Server 2028 : Server Core est durci par défaut dès l'installation",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/windows-server-2028-server-core-durci-par-defaut/",
+      "r": "La préversion applique des centaines de réglages de sécurité alignés sur CIS et DISA STIG (SMB signé, pare-feu actif, RDP avec NLA), imposés par stratégie. Certains scripts d'administration de Windows Server 2025 peuvent échouer : tester en laboratoire et mesurer avec Get-MSHardenedPolicyScore."
+    },
+    {
+      "d": "2026-11-18",
+      "k": "Système",
+      "t": "PowerShell 7 sera intégré à Windows : Windows PowerShell 5.1 est déprécié",
+      "s": "IT-Connect",
+      "u": "https://www.it-connect.fr/powershell-7-integre-windows-powershell-5-1-deprecie/",
+      "r": "Microsoft annonce PowerShell 7 par défaut dans la prochaine version de Windows ; la 5.1 devient une fonctionnalité à la demande avant d'être retirée plus tard. Il faut inventorier les scripts et tâches qui lancent powershell.exe et tester PSEdition (Desktop ou Core) pour les adapter."
     },
     {
       "d": "2026-11-17",
@@ -650,46 +690,6 @@ const NEWS = [
       "s": "Le Crabe Info",
       "u": "https://lecrabeinfo.net/mises-a-jour-windows/windows-11-kb5132061-novembre-2026/",
       "r": "La mise à jour KB5132061 corrige une faille zero-day exploitée dans Outlook (CVE-2026-124194, vol de hash NTLMv2) et renforce NTLM par défaut. PowerShell contrôle aussi plus strictement la signature des scripts : réenregistrer et resigner les scripts en UTF-8 avec BOM."
-    },
-    {
-      "d": "2026-11-10",
-      "k": "Cybersécurité",
-      "t": "Faux support IT sur Teams : moins de 15 minutes entre la réponse et le malware",
-      "s": "IT-Connect",
-      "u": "https://www.it-connect.fr/teams-faux-support-it-email-bombing/",
-      "r": "Arctic Wolf décrit une attaque sans faille logicielle : email bombing, faux technicien contactant la victime sur Teams, puis prise en main à distance (Quick Assist, AnyDesk). Il faut revoir l'accès externe de Teams dans le centre d'administration et limiter les contacts externes à une liste de domaines partenaires."
-    },
-    {
-      "d": "2026-11-09",
-      "k": "Réseau",
-      "t": "SonicWall : une faille du VPN SSL permet de contourner le MFA, et elle est exploitée",
-      "s": "IT-Connect",
-      "u": "https://www.it-connect.fr/sonicwall-vpn-ssl-faille-saml-mfa-cve-2026-19868/",
-      "r": "La CVE-2026-19868 permet, sur les pare-feu SonicWall dont le VPN SSL utilise SAML, de contourner l'authentification SAML et son MFA avec des identifiants valides d'une autre méthode ; l'exploitation est confirmée et il n'existe aucun contournement. Il faut passer en SonicOS 7.3.4-7013 (Gen7) ou 8.2.3-8015 (Gen8)."
-    },
-    {
-      "d": "2026-11-06",
-      "k": "Système",
-      "t": "*sshole : un mot de passe trop long ouvre l'accès root via SSH sur Alpine Linux",
-      "s": "IT-Connect",
-      "u": "https://www.it-connect.fr/faille-openssh-musl-sshhole-alpine-linux/",
-      "r": "La CVE-2026-123158 (CVSS 8,1) permet à un mot de passe de 257 à 1 024 caractères de contourner le verrouillage de comptes comme root sur OpenSSH avec musl sans PAM (Alpine, OpenWrt, Buildroot, Yocto). Il faut mettre OpenSSH à jour (10.6p2 ou correctif Alpine) ou désactiver PasswordAuthentication en gardant l'accès par clé."
-    },
-    {
-      "d": "2026-11-05",
-      "k": "Système",
-      "t": "Linux : une faille dans APT permet de remplacer un paquet signé et de l'exécuter en root",
-      "s": "IT-Connect",
-      "u": "https://www.it-connect.fr/faille-apt-cve-2026-109518-debian-ubuntu-root/",
-      "r": "La CVE-2026-109518 permet à un attaquant capable de manipuler le trafic HTTP (proxy ou miroir malveillant) de faire écraser un paquet déjà vérifié par APT, d'où une exécution de code en root sur Debian, Ubuntu et dérivées. Il faut mettre APT à jour en désactivant les reprises (apt upgrade -o Acquire::Retries=0) et utiliser des miroirs officiels en HTTPS."
-    },
-    {
-      "d": "2026-11-02",
-      "k": "Cybersécurité",
-      "t": "Noyau Linux : faille TCP critique (CVE-2026-98432), accès root à distance",
-      "s": "IT-Connect",
-      "u": "https://www.it-connect.fr/cve-2026-98432-faille-noyau-linux-tcp-root-distance/",
-      "r": "Un use-after-free dans l'établissement des connexions TCP IPv4 (CVSS 9,8) touche le noyau depuis la 4.4, surtout les serveurs avec un écouteur MPTCP ; aucune exploitation constatée à la publication. Il faut installer le noyau corrigé de sa distribution et redémarrer, ou désactiver MPTCP (net.mptcp.enabled=0) en attendant."
     }
   ];
 /*NEWS:END*/
